@@ -1,0 +1,20 @@
+{
+  "vehicle": {
+    "car_petrol": 0.192,
+    "car_diesel": 0.171,
+    "motorcycle": 0.103,
+    "bus": 0.089
+  },
+  "plastics": {
+    "plastic_bottle": 0.033,
+    "plastic_bag": 0.01
+  },
+  "heating": {
+    "electricity_kwh": 0.233,
+    "lpg_per_liter": 2.68,
+    "natural_gas_per_m3": 2.02
+  },
+  "tree_offset": {
+    "tree_species_default_annual_offset_kg": 21
+  }
+}
