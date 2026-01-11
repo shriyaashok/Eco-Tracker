@@ -39,13 +39,20 @@ ml_service/*.csv
 logs/
 *.log
 
+<<<<<<< Updated upstream
 
 #Environment variables
+=======
+# Environment variables
+>>>>>>> Stashed changes
 .env
 backend/.env
 frontend/.env
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 # Dependencies or temp folders
 frontend/node_modules/
 backend/node_modules/

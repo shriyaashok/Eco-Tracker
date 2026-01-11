@@ -1,5 +1,8 @@
+<<<<<<< Updated upstream
 // MongoDB connection helper
 // TODO: read MONGO_URI from env and export connect function
+=======
+>>>>>>> Stashed changes
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
@@ -12,4 +15,8 @@ const connectDB = async () => {
   }
 };
 
+<<<<<<< Updated upstream
 module.exports = connectDB;
+=======
+module.exports = connectDB;
+>>>>>>> Stashed changes
