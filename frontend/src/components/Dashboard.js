@@ -28,7 +28,7 @@ export default function Dashboard() {
 
   const fetchDashboardData = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/dashboard/summary?userId=${userId}`);
+      const response = await fetch(`http://localhost:5050/api/dashboard/summary?userId=${userId}`);
       const data = await response.json();
       
       if (data.success) {
@@ -214,22 +214,36 @@ export default function Dashboard() {
       <div style={{ padding: '30px' }}>
         {activeSection === 'home' && (
           <>
-            {/* Welcome Section */}
+            {/* BIG Welcome Section */}
             <div style={{
               backgroundColor: 'white',
-              padding: '40px',
-              borderRadius: '15px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-              marginBottom: '30px',
+              padding: '60px 40px',
+              borderRadius: '20px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+              marginBottom: '40px',
               textAlign: 'center',
               background: 'linear-gradient(135deg, #F1F8E9, #E8F5E9)',
-              border: '2px solid #4CAF50'
+              border: '3px solid #4CAF50'
             }}>
-              <div style={{ fontSize: '4rem', marginBottom: '20px' }}>🌱</div>
-              <h2 style={{ color: '#2E7D32', marginBottom: '15px', fontSize: '32px' }}>
-                Welcome to EcoTracker!
-              </h2>
-              <p style={{ fontSize: '18px', color: '#666', marginBottom: '25px' }}>
+              <div style={{ fontSize: '6rem', marginBottom: '30px' }}>🌱</div>
+              <h1 style={{ 
+                color: '#2E7D32', 
+                marginBottom: '20px', 
+                fontSize: '64px',
+                fontWeight: 'bold',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+                letterSpacing: '2px'
+              }}>
+                WELCOME TO ECO-TRACKER
+              </h1>
+              <p style={{ 
+                fontSize: '24px', 
+                color: '#666', 
+                marginBottom: '30px',
+                fontWeight: '500',
+                maxWidth: '600px',
+                margin: '0 auto 30px auto'
+              }}>
                 Track your carbon footprint by logging vehicles, plastics, energy usage, and tree plantations.
               </p>
               <button
@@ -238,15 +252,22 @@ export default function Dashboard() {
                   backgroundColor: '#2E7D32',
                   color: 'white',
                   border: 'none',
-                  padding: '15px 30px',
-                  borderRadius: '8px',
-                  fontSize: '18px',
+                  padding: '20px 40px',
+                  borderRadius: '12px',
+                  fontSize: '20px',
                   fontWeight: 'bold',
                   cursor: 'pointer',
-                  transition: 'background-color 0.3s'
+                  transition: 'all 0.3s',
+                  boxShadow: '0 4px 15px rgba(46, 125, 50, 0.3)'
                 }}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#1B5E20'}
-                onMouseOut={(e) => e.target.style.backgroundColor = '#2E7D32'}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#1B5E20';
+                  e.target.style.transform = 'translateY(-2px)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#2E7D32';
+                  e.target.style.transform = 'translateY(0px)';
+                }}
               >
                 Add Your First Entry
               </button>

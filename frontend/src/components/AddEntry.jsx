@@ -65,6 +65,25 @@ export default function AddEntry() {
     setMessage('');
 
     const userId = localStorage.getItem("uid");
+    
+    if (!userId) {
+      setMessage('Error: No user ID found. Please log in again.');
+      setLoading(false);
+      return;
+    }
+    
+    console.log('Submitting entry:', { type, data, userId });
+
+    // Test if backend is reachable
+    try {
+      const testResponse = await fetch('http://localhost:4000/api/dashboard/summary?userId=test');
+      console.log('Backend test response status:', testResponse.status);
+    } catch (testError) {
+      console.error('Backend not reachable:', testError);
+      setMessage('Error: Cannot connect to backend server. Please check if it\'s running on port 4000.');
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch(`http://localhost:4000/api/entries/${type}`, {
@@ -73,7 +92,15 @@ export default function AddEntry() {
         body: JSON.stringify({ userId, ...data }),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log('Response result:', result);
 
       if (result.success) {
         setMessage('Entry added successfully! 🎉');
@@ -89,11 +116,13 @@ export default function AddEntry() {
           navigate("/dashboard");
         }, 1500);
       } else {
-        setMessage('Error adding entry. Please try again.');
+        setMessage(`Error: ${result.error || 'Failed to add entry. Please try again.'}`);
+        console.error('Backend error:', result);
       }
     } catch (error) {
-      console.error(error);
-      setMessage('Server error. Please try again.');
+      console.error('Fetch error:', error);
+      console.error('Error details:', error.message);
+      setMessage(`Network error: ${error.message}. Please check if backend is running.`);
     } finally {
       setLoading(false);
     }
@@ -106,17 +135,32 @@ export default function AddEntry() {
 
   const handlePlasticSubmit = (e) => {
     e.preventDefault();
-    handleSubmit('plastic', plasticData);
+    // Fix field names to match backend
+    const plasticPayload = {
+      plasticType: plasticData.type,
+      quantity: plasticData.quantity
+    };
+    handleSubmit('plastic', plasticPayload);
   };
 
   const handleEnergySubmit = (e) => {
     e.preventDefault();
-    handleSubmit('energy', energyData);
+    // Fix field names to match backend
+    const energyPayload = {
+      energySource: energyData.type,
+      amount: energyData.amount,
+      isRenewable: energyData.renewable
+    };
+    handleSubmit('energy', energyPayload);
   };
 
   const handlePlantationSubmit = (e) => {
     e.preventDefault();
-    handleSubmit('plantation', plantationData);
+    // Fix field names to match backend
+    const plantationPayload = {
+      treesPlanted: plantationData.trees
+    };
+    handleSubmit('plantation', plantationPayload);
   };
 
   return (
