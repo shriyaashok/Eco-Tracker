@@ -39,6 +39,13 @@ ml_service/*.csv
 logs/
 *.log
 
+
+#Environment variables
+.env
+backend/.env
+frontend/.env
+
+
 # Dependencies or temp folders
 frontend/node_modules/
 backend/node_modules/
